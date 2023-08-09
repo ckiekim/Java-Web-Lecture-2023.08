@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Selector</title>
+    <style>
+        #head { color: blue; text-align: center; }
+        .strong { font-size: 20px; font-weight: bold; }
+        p { color: crimson; background-color: beige; }
+        h1, p { margin: 20px; }
+        ul > li { color: brown; }                           /* 자식 셀렉터 */
+        div span { font-weight: bold; font-style: italic; }    /* 자손 셀렉터 */
+    </style>
+</head>
+<body>
+    <h1 id="head">ID Selector</h1>
+    <p>element(tag) selector가 적용되었습니다.</p>
+    <p>다음은 <span class="strong">class selector</span>가 적용되었습니다.</p>
+    <ul>
+        <li>사과</li>
+        <li>참외</li>
+        <li>수박</li>
+    </ul>
+    <div>
+        <p>div tag 내의 <span>p tag</span> 입니다.</p>
+        <span>span tag</span>
+    </div>
+</body>
+</html>
