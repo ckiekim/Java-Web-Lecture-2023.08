@@ -119,4 +119,9 @@ public class DemoController {
 		return "07.writeResult";
 	}
 	
+	@GetMapping("/calculator")
+	public String calculator() {
+		return "08.calculator";
+	}
+	
 }
