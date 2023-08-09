@@ -101,4 +101,22 @@ public class DemoController {
 		return "05.calcResult";
 	}
 	
+	@GetMapping("/write")
+	public String writeForm() {
+		return "06.writeForm";
+	}
+	
+	@PostMapping("/write")
+	public String writeProc(HttpServletRequest req, Model model) {
+		String title = req.getParameter("title");
+		String[] languages = req.getParameterValues("language");
+		String content = req.getParameter("content");
+		
+		String joinLanguages = (languages == null) ? "" : String.join(", ", languages);
+		Board board = new Board(title, joinLanguages, content.replace("\n", "<br>"));
+//		System.out.println(board);
+		model.addAttribute("board", board);
+		return "07.writeResult";
+	}
+	
 }
