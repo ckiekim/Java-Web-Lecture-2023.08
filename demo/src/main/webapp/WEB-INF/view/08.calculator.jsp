@@ -18,9 +18,10 @@
         <table>
             <tr>
                 <td class="result" colspan="4">${eval}</td>
+                <input type="hidden" name="eval" value="${eval}">
             </tr>
             <tr>
-                <td><button type="submit" name="op" value="C">BS</button></td>
+                <td><button type="submit" name="op" value="C">C</button></td>
                 <td><button type="submit" name="op" value="/">÷</button></td>
                 <td><button type="submit" name="op" value="*">×</button></td>
                 <td><button type="submit" name="op" value="-">－</button></td>
