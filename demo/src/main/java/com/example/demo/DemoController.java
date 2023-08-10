@@ -13,8 +13,6 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class DemoController {
-	String a_ = null, b_ = null, op = null;
-	int a = 0, b = 0, result = 0;
 	
 	// localhost:8080/demo/index
 	@GetMapping("/index")
@@ -130,51 +128,115 @@ public class DemoController {
 		return "08.calculator";
 	}
 	
-//		Object obj = session.getAttribute("stack");
-//		Stack<Object> stack = (obj == null) ? new Stack<>() : (Stack) obj;
-	
 	@PostMapping("/calculator")
-	public String calculatorProc(HttpServletRequest req, Model model) {
+	public String calculatorProc(HttpServletRequest req, HttpSession session, Model model) {
 		String num_ = req.getParameter("num");
 		String op_ = req.getParameter("op");
-		String eval = req.getParameter("eval");
-		if (eval == null)
-			eval = "";
+		Object obj = session.getAttribute("stack");
+		Stack<String> stack = (obj == null) ? new Stack<>() : (Stack) obj;
 		
 		if (num_ != null) {
-			eval += num_;
-			if (a_ == null) {
-				a_ = num_;
-				a = Integer.parseInt(a_);
-			} else if (b_ == null) {
-				b_ = num_;
-				b = Integer.parseInt(b_);
-			}
-			model.addAttribute("eval", eval);
-		} else if (op_ != null) {
-			if (op_.equals("C")) {
-				eval = "";
-				a_ = null; b_ = null; op = null;
-				a = 0; b = 0;
-				model.addAttribute("eval", eval);
-			} else if (op_.equals("=")) {
-				switch(op) {
-				case "+": result = a + b; break;
-				case "-": result = a - b; break;
-				case "*": result = a * b; break;
-				case "/": result = (int) (a / b); break;
-				default: result = 0;
-				}
-				a_ = null; b_ = null; op = null;
-				a = 0; b = 0;
-				model.addAttribute("eval", result);
+			if (stack.isEmpty()) {
+				stack.push(num_);
 			} else {
-				eval += " " + op_ + " ";
-				op = op_;
-				model.addAttribute("eval", eval);
+				String element = stack.pop();
+				if (element.equals("/") || element.equals("*")
+						|| element.equals("-") || element.equals("+")) {
+					stack.push(element);
+					stack.push(num_);
+				} else {
+					num_ = element + num_;
+					stack.push(num_);
+				}
 			}
+			session.setAttribute("stack", stack);
+			model.addAttribute("eval", getEval(stack));
+		} else if (op_ != null && !op_.equals("=")) {
+			if (op_.equals("C")) {
+				if (stack.isEmpty())
+					;
+				else {
+					String s = stack.pop();
+					if (s.length() >= 1) {
+						s = s.substring(0, s.length()-1);
+						stack.push(s);
+					}
+				}
+			} else 
+				stack.push(op_);
+			session.setAttribute("stack", stack);
+			model.addAttribute("eval", getEval(stack));
+		} else {
+			int result = 0;
+			int num2 = Integer.parseInt(stack.pop());
+			String op = stack.pop();
+			int num1 = Integer.parseInt(stack.pop());
+			switch(op) {
+			case "+": result = num1 + num2; break;
+			case "-": result = num1 - num2; break;
+			case "*": result = num1 * num2; break;
+			case "/": result = (int) (num1 / num2); break;
+			default: result = 0;
+			}
+			session.removeAttribute("stack");
+			model.addAttribute("eval", result);
 		}
 		return "08.calculator";
 	}
 	
+	String getEval(Stack<String> stack) {
+		String eval = "";
+		for (String s: stack)
+			eval += s + " ";
+		return eval;
+	}
+
+//	String a_ = null, b_ = null, op = null;
+//	int a = 0, b = 0, result = 0;
+//	@PostMapping("/calculator")
+//	public String calculatorProc(HttpServletRequest req, HttpSession session, Model model) {
+//		String num_ = req.getParameter("num");
+//		String op_ = req.getParameter("op");
+//		String eval = req.getParameter("eval");
+//		if (eval == null)
+//			eval = "";
+//		
+//		Object obj = session.getAttribute("stack");
+//		Stack<Object> stack = (obj == null) ? new Stack<>() : (Stack) obj;
+//		
+//		if (num_ != null) {
+//			eval += num_;
+//			if (a_ == null) {
+//				a_ = num_;
+//				a = Integer.parseInt(a_);
+//			} else if (b_ == null) {
+//				b_ = num_;
+//				b = Integer.parseInt(b_);
+//			}
+//			model.addAttribute("eval", eval);
+//		} else if (op_ != null) {
+//			if (op_.equals("C")) {
+//				eval = "";
+//				a_ = null; b_ = null; op = null;
+//				a = 0; b = 0;
+//				model.addAttribute("eval", eval);
+//			} else if (op_.equals("=")) {
+//				switch(op) {
+//				case "+": result = a + b; break;
+//				case "-": result = a - b; break;
+//				case "*": result = a * b; break;
+//				case "/": result = (int) (a / b); break;
+//				default: result = 0;
+//				}
+//				a_ = null; b_ = null; op = null;
+//				a = 0; b = 0;
+//				model.addAttribute("eval", result);
+//			} else {
+//				eval += " " + op_ + " ";
+//				op = op_;
+//				model.addAttribute("eval", eval);
+//			}
+//		}
+//		return "08.calculator";
+//	}
 }
