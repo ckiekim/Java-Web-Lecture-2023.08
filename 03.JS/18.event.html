@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event 처리</title>
+    <script>
+        function btn2click() {
+            alert('버튼 2가 클릭되었음.');
+        }
+        window.onload = function() {
+            const btn3 = document.getElementById('btn3');
+            btn3.onclick = function() {
+                alert('버튼 3이 클릭되었음.');
+            }
+
+            const btn4 = document.getElementById('btn4');
+            btn4.addEventListener('click', function() {
+                alert('버튼 4가 클릭되었음.');
+            });
+            btn4.addEventListener('mouseover', function() {
+                const h3 = document.createElement('h3');
+                const textNode = document.createTextNode('마우스오버 이벤트 발생');
+                h3.appendChild(textNode);
+                document.body.appendChild(h3);
+            });
+            btn4.addEventListener('mouseout', function() {
+                const h3 = document.querySelector('h3');
+                document.body.removeChild(h3);
+            });
+
+            const btn5 = document.getElementById('btn5');
+            btn5.addEventListener('mouseover', function() {
+                const img = document.createElement('img');
+                img.src = 'img/아따맘마.jpg';
+                img.width = 300;
+                img.style.margin = '30px';
+                document.body.appendChild(img);
+            });
+            btn5.addEventListener('mouseout', function() {
+                const img = document.querySelector('img');
+                document.body.removeChild(img);
+            });
+
+            // a 태그의 기본 이벤트 처리를 제거
+            const btn6 = document.getElementById('btn6');
+            btn6.onclick = function() {
+                alert('a 태그의 기본 이벤트 처리를 제거하였음.');
+                const a = document.querySelector('a');
+                a.onclick = function() {
+                    return false;           // 기본 이벤트 처리 제거
+                }
+            }
+        }
+    </script>
+</head>
+<body style="margin: 40px;">
+    <button onclick="alert('버튼 1이 클릭되었음.')">버튼 1</button>
+    <button onclick="btn2click()">버튼 2</button>
+    <button id="btn3">버튼 3</button>
+    <br><br>
+    <button id="btn4">버튼 4</button>
+    <button id="btn5">버튼 5</button>
+    <br><br>
+    <button id="btn6">버튼 6</button>
+    <a href="https://www.hanbit.co.kr/academy/">한빛아카데미</a>
+</body>
+</html>
