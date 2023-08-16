@@ -29,7 +29,7 @@
             <div class="col">
                 <h3><strong>회원 가입</strong></h3>
                 <hr>
-                <form action="/demo/bs/register" method="post" enctype="multipart/form-data">
+                <form action="/demo/bs/register3" method="post" enctype="multipart/form-data">
                     <table class="table table-borderless">
                         <tr>
                             <td style="width: 40%;"><label class="col-form-label">사용자 ID</label></td>
