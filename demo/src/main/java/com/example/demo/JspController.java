@@ -12,12 +12,14 @@ import jakarta.servlet.http.HttpSession;
 public class JspController {
 
 	@GetMapping("/sample")
-	public String sample() {
+	public String sample(Model model) {
+		model.addAttribute("menu", "ai");
 		return "jsp/sample";
 	}
 	
 	@GetMapping("/schedule")
-	public String schedule() {
+	public String schedule(Model model) {
+		model.addAttribute("menu", "schedule");
 		return "jsp/schedule";
 	}
 	
