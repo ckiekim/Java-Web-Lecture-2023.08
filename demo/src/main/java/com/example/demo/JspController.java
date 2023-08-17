@@ -1,6 +1,10 @@
 package com.example.demo;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,6 +96,25 @@ public class JspController {
 		list.add(m1); list.add(m2); list.add(m3); list.add(m4);
 		model.addAttribute("memberList", list);
 		return "jsp/jstl1_core";
+	}
+	
+	@GetMapping("/jstlFmt")
+	public String jstlFmt(Model model) {
+		int price = 12345000;
+		Date now = new Date();
+		model.addAttribute("price", price);
+		model.addAttribute("now", now);
+		
+		LocalDate ldNow = LocalDate.now();
+		LocalTime ltNow = LocalTime.now();
+		LocalDateTime ldtNow = LocalDateTime.now();
+		model.addAttribute("ldNow", ldNow);
+		model.addAttribute("ltNow", ltNow);
+		model.addAttribute("ltNow2", ltNow.toString().substring(0, 8));
+		model.addAttribute("ldtNow", ldtNow);
+		model.addAttribute("ldtNow2", ldtNow.toString().substring(0, 19).replace("T", " "));
+		
+		return "jsp/jstl2_fmt";
 	}
 	
 }

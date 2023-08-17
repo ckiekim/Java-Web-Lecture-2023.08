@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>JSTL</title>
-	<style>td { padding: 3px; }</style>
+	<style>td, th { padding: 3px; }</style>
 </head>
 <body style="margin: 40px;">
 	<h1>JSTL(JSP Standard Tag Library) Core</h1>
