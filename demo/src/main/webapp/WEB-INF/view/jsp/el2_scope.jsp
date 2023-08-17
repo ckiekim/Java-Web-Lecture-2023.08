@@ -7,7 +7,6 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
 	<title>EL 표현언어</title>
 	<style>td { padding: 3px; }</style>
 </head>
