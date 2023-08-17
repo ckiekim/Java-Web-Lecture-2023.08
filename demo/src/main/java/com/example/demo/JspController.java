@@ -117,4 +117,12 @@ public class JspController {
 		return "jsp/jstl2_fmt";
 	}
 	
+	@GetMapping("/jstlFn")
+	public String jstlFn(Model model) {
+		model.addAttribute("str1", "Hello World!");
+		model.addAttribute("str2", "쇼핑몰의 중심 JSP Mall");
+		model.addAttribute("str3", "중심");
+		return "jsp/jstl3_fn";
+	}
+	
 }
