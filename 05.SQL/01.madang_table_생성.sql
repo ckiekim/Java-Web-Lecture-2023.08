@@ -35,8 +35,8 @@ CREATE TABLE Orders
 	orderid number(2) NOT NULL,
 	saleprice number(8) DEFAULT 0 NOT NULL,
 	orderdate date DEFAULT SYSDATE,
-	bookid number(2) NOT NULL,
 	custid number(2) NOT NULL,
+	bookid number(2) NOT NULL,
 	PRIMARY KEY (orderid)
 );
 

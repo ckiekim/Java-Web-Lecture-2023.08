@@ -15,11 +15,6 @@ INSERT INTO Customer VALUES (2, '김연아', '대한민국 서울', '000-6000-00
 INSERT INTO Customer VALUES (3, '장미란', '대한민국 강원도', '000-7000-0001');
 INSERT INTO Customer VALUES (4, '추신수', '미국 클리블랜드', '000-8000-0001');
 INSERT INTO Customer VALUES (5, '박세리', '대한민국 대전',  NULL);
-INSERT INTO Customer VALUES (6, '김지성', '영국 맨체스타', '000-5000-0001');
-INSERT INTO Customer VALUES (7, '고연아', '대한민국 서울', '000-6000-0001');  
-INSERT INTO Customer VALUES (8, '박미란', '대한민국 강원도', '000-7000-0001');
-INSERT INTO Customer VALUES (9, '최신수', '미국 클리블랜드', '000-8000-0001');
-INSERT INTO Customer VALUES (10, '송세리', '대한민국 대전',  NULL);
 
 -- 주문(Orders) 테이블의 책값은 할인 판매를 가정함
 INSERT INTO Orders VALUES (1, 6000, TO_DATE('2014-07-01','yyyy-mm-dd'), 1, 1); 

@@ -41,11 +41,11 @@
 		<suspend_validator>false</suspend_validator>
 		<export_setting>
 			<export_ddl_setting>
-				<output_path></output_path>
-				<encoding></encoding>
-				<line_feed></line_feed>
+				<output_path>src\main\java\com\example\demo\madang.sql</output_path>
+				<encoding>UTF-8</encoding>
+				<line_feed>CR+LF</line_feed>
 				<is_open_after_saved>true</is_open_after_saved>
-				<environment_id>null</environment_id>
+				<environment_id>0</environment_id>
 				<category_id>null</category_id>
 				<ddl_target>
 					<create_comment>true</create_comment>
@@ -135,7 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2023-08-18 10:09:51</creation_date>
-			<updated_date>2023-08-18 11:29:32</updated_date>
+			<updated_date>2023-08-18 13:35:06</updated_date>
 			<model_property>
 				<name>프로젝트명</name>
 				<value></value>
@@ -676,8 +676,8 @@
 		</table>
 		<table>
 			<id>2</id>
-			<height>145</height>
-			<width>241</width>
+			<height>157</height>
+			<width>253</width>
 				<font_name>맑은 고딕</font_name>
 				<font_size>9</font_size>
 			<x>432</x>
@@ -841,8 +841,8 @@
 				</normal_column>
 				<normal_column>
 					<id>11</id>
-					<referenced_column>0</referenced_column>
-					<relation>0</relation>
+					<referenced_column>4</referenced_column>
+					<relation>1</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -875,8 +875,8 @@
 				</normal_column>
 				<normal_column>
 					<id>12</id>
-					<referenced_column>4</referenced_column>
-					<relation>1</relation>
+					<referenced_column>0</referenced_column>
+					<relation>0</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
