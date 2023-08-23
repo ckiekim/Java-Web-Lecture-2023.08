@@ -1,0 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%-- <body> 좌측에 있는 aside menu --%>
+
+            <div class="col-3">
+                <img src="https://picsum.photos/256/256" class="rounded-circle" width="90%">
+                <div class="mt-2">
+                    오늘의 명언을 이 자리에 적습니다.
+                    <a href="#"><span class="badge bg-secondary">수정</span></a>
+                </div>
+                <div class="mt-5">
+                    <i class="fa fa-envelope me-2"></i>ckiekim@naver.com<br>
+                    <img src="/demo/img/github.png" height="16" class="me-2"><a href="#">ckiekim</a><br>
+                    <img src="/demo/img/facebook.png" height="16" class="me-2"><a href="#">ckiekimFB</a><br>
+                    <img src="/demo/img/addr.png" height="16" class="me-2">서울시 영등포구
+                        <a href="#"><span class="badge bg-secondary">날씨</span></a><br>
+                    <button class="btn btn-sm btn-outline-primary mt-3">Edit Profile</button>
+                </div>
+            </div>

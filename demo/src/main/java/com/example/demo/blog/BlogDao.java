@@ -11,15 +11,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-//@Component
+@Component
 public class BlogDao {
-//	@Value("${spring.datasource.url}") private String url;
-//	@Value("${spring.datasource.username}") private String username;
-//	@Value("${spring.datasource.password}") private String password;
+	@Value("${spring.datasource.url}") private String url;
+	@Value("${spring.datasource.username}") private String username;
+	@Value("${spring.datasource.password}") private String password;
 
-	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	private String username = "hmuser";
-	private String password = "hmpass";
+//	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
+//	private String username = "hmuser";
+//	private String password = "hmpass";
 	
 	public Blog getBlog(int bid) {
 		String sql = "select * from blog where bid=?";

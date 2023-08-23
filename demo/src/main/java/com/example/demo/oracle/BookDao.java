@@ -91,5 +91,53 @@ public class BookDao {
 		return list;
 	}
 	
+	public void insertBook(Book b) {
+		Connection conn = myConnection();
+		String sql = "insert into book values (?, ?, ?, ?)";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, b.getBookId());
+			pstmt.setString(2, b.getBookname());
+			pstmt.setString(3, b.getPublisher());
+			pstmt.setInt(4, b.getPrice());
+			pstmt.executeUpdate();
+			
+			pstmt.close(); conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateBook(Book b) {
+		Connection conn = myConnection();
+		String sql = "update book set bookname=?, publisher=?, price=? where bookid=?";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, b.getBookname());
+			pstmt.setString(2, b.getPublisher());
+			pstmt.setInt(3, b.getPrice());
+			pstmt.setInt(4, b.getBookId());
+			pstmt.executeUpdate();
+			
+			pstmt.close(); conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteBook(int bookId) {
+		Connection conn = myConnection();
+		String sql = "delete from book where bookid=?";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bookId);
+			pstmt.executeUpdate();
+			
+			pstmt.close(); conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 }
