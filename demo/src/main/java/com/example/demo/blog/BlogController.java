@@ -39,8 +39,9 @@ public class BlogController {
 	}
 	
 	@GetMapping("/detail/{bid}")
-	public String detail(@PathVariable int bid, Model model) {
-		bDao.increaseViewCount(bid);
+	public String detail(@PathVariable int bid, String option, Model model) {
+		if (option == null || option.equals(""))
+			bDao.increaseViewCount(bid);		// DNI option이 설정되어 있으면 조회수를 증가시키지 않음
 		Blog blog = bDao.getBlog(bid);
 		model.addAttribute("blog", blog);
 		model.addAttribute("menu", "blog");
@@ -57,8 +58,10 @@ public class BlogController {
 	
 	@PostMapping("/update")
 	public String updateProc(Blog blog) {
+//	public String updateProc(int bid, String penName, String title, String content) {
+//		Blog blog = new Blog(bid, penName, title, content);
 		bDao.updateBlog(blog);
-		return "redirect:/blog/detail/" + blog.getBid();
+		return "redirect:/blog/detail/" + blog.getBid() + "?option=DNI";
 	}
 	
 	
