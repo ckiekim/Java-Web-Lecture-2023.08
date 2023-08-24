@@ -64,6 +64,17 @@ public class BlogController {
 		return "redirect:/blog/detail/" + blog.getBid() + "?option=DNI";
 	}
 	
+	@GetMapping("/delete/{bid}")
+	public String delete(@PathVariable int bid, Model model) {
+		model.addAttribute("bid", bid);
+		model.addAttribute("menu", "blog");
+		return "blog/delete";
+	}
 	
+	@GetMapping("/deleteConfirm/{bid}")
+	public String deleteConfirm(@PathVariable int bid) {
+		bDao.deleteBlog(bid);
+		return "redirect:/blog/list";
+	}
 	
 }
