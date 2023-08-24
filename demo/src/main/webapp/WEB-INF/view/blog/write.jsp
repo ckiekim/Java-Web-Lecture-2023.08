@@ -28,12 +28,18 @@
                 					<td><input class="form-control" type="text" name="penName"></td>
                 				</tr>
                 				<tr>
-                					<td><label class="col-form-label">필명</label></td>
-                					<td><input class="form-control" type="text" name="penName"></td>
+                					<td><label class="col-form-label">제목</label></td>
+                					<td><input class="form-control" type="text" name="title"></td>
                 				</tr>
                 				<tr>
-                					<td><label class="col-form-label">필명</label></td>
-                					<td><input class="form-control" type="text" name="penName"></td>
+                					<td><label class="col-form-label">내용</label></td>
+                					<td><textarea class="form-control" rows="10" name="content"></textarea></td>
+                				</tr>
+                				<tr>
+                					<td colspan="2" style="text-align: center;">
+                						<input class="btn btn-primary" type="submit" value="제출">
+                						<input class="btn btn-secondary" type="reset" value="취소">
+                					</td>
                 				</tr>
                 			</table>
                 		</form>
