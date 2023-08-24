@@ -7,22 +7,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/blog")
 public class BlogController {
-	@Autowired private BlogDao bDao;
-
+//	private BlogDao bDao = new BlogDao();
+	@Autowired private BlogDao bDao;		// Spring에서 BlogDao() 객체를 생성해서 inject
+	
 	@GetMapping("/list")
-	public String list(@RequestParam(name="f", defaultValue="title") String field,
-			   @RequestParam(name="q", defaultValue="") String query,
-			   Model model) {
-		List<Blog> list = bDao.getBlogList(field, query);
+	public String list(Model model) {
+		List<Blog> list = bDao.getBlogList("title", "");
 		model.addAttribute("blogList", list);
-		model.addAttribute("field", field);
-		model.addAttribute("query", query);
-		model.addAttribute("menu", "blog");
 		return "blog/list";
 	}
 }
