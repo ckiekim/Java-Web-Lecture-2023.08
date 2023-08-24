@@ -20,7 +20,7 @@
             		<strong>블로그 목록</strong>
             		<span style="font-size: 0.6em;">
             			<a href="/demo/blog/write">
-            				<i class="ms-5 fa-regular fa-pen-to-square"></i> 글쓰기
+            				<i class="ms-5 fa-regular fa-file-lines"></i> 글쓰기
             			</a>
             		</span>
             	</h3>
