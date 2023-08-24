@@ -18,6 +18,13 @@ public class BlogController {
 	public String list(Model model) {
 		List<Blog> list = bDao.getBlogList("title", "");
 		model.addAttribute("blogList", list);
+		model.addAttribute("menu", "blog");
 		return "blog/list";
+	}
+	
+	@GetMapping("/write")
+	public String writeForm(Model model) {
+		model.addAttribute("menu", "blog");
+		return "blog/write";
 	}
 }
