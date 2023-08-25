@@ -1,6 +1,6 @@
 Routing table,,,,,
 routing,method,입력 파라메터,보여줄 화면,출력 파라메터,세션
-/demo/blog/list,GET,"f, q",list.jsp ,"blogList, menu",
+/demo/blog/list,GET,"f, q",list.jsp ,"blogList, menu, field, query",
 /demo/blog/detail/{bid},GET,"bid, option",detail.jsp ,"blog, menu",
 /demo/blog/write,GET,,write.jsp ,menu,
 /demo/blog/write,POST,"penName, title, content",redirect:/blog/list,,
