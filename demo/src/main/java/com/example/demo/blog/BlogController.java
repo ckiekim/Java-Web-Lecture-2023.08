@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/blog")
@@ -17,10 +18,14 @@ public class BlogController {
 	@Autowired private BlogDao bDao;		// Spring에서 BlogDao() 객체를 생성해서 inject
 	
 	@GetMapping("/list")
-	public String list(Model model) {
-		List<Blog> list = bDao.getBlogList("title", "");
+	public String list(@RequestParam(name="f", defaultValue="title") String field, 
+						@RequestParam(name="q", defaultValue="") String query, 
+						Model model) {
+		List<Blog> list = bDao.getBlogList(field, query);
 		model.addAttribute("blogList", list);
 		model.addAttribute("menu", "blog");
+		model.addAttribute("field", field);
+		model.addAttribute("query", query);
 		return "blog/list";
 	}
 	
