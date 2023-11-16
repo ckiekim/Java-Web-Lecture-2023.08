@@ -2,6 +2,7 @@ package com.human.sample.service;
 
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,8 +50,13 @@ public class UserServiceOracleImpl implements UserService {
 
 	@Override
 	public int login(String uid, String pwd) {
-		// TODO Auto-generated method stub
-		return 0;
+		User user = userDao.getUser(uid);
+		if (user == null)
+			return UID_NOT_EXIST;
+		if (BCrypt.checkpw(pwd, user.getPwd()))
+			return CORRECT_LOGIN;
+		else
+			return WRONG_PASSWORD;
 	}
 
 }
