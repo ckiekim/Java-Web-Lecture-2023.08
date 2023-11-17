@@ -1,5 +1,8 @@
 package com.human.sample.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -7,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,6 +22,23 @@ import com.human.sample.service.UserService;
 public class UserController {
 	@Autowired private UserService userService;
 
+	@GetMapping("/list/{page}")
+	public String list(@PathVariable int page, HttpSession session, Model model) {
+		List<User> list = userService.getUserList(page);
+		model.addAttribute("userList", list);
+		
+		int totalUsers = userService.getUserCount();
+		int totalPages = (int) Math.ceil((double)totalUsers / userService.RECORDS_PER_PAGE);
+		List<String> pageList = new ArrayList<>();
+		for (int i=1; i<=totalPages; i++)
+			pageList.add(String.valueOf(i));
+		model.addAttribute("pageList", pageList);
+		session.setAttribute("currentUserPage", page);
+		
+		return "user/list";
+	}
+	
+	
 	@GetMapping("/login")
 	public String loginForm() {
 		return "user/login";
