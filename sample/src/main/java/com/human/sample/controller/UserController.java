@@ -22,6 +22,22 @@ import com.human.sample.service.UserService;
 public class UserController {
 	@Autowired private UserService userService;
 
+	@GetMapping("/update/{uid}")
+	public String updateForm(@PathVariable String uid) {
+		return "";
+	}
+	
+	@PostMapping("/update/{uid}")
+	public String updateProc(@PathVariable String uid) {
+		return "";
+	}
+	
+	@GetMapping("/delete/{uid}")
+	public String delete(@PathVariable String uid) {
+		System.out.println(uid);
+		return "redirect:/home";
+	}
+	
 	@GetMapping("/list/{page}")
 	public String list(@PathVariable int page, HttpSession session, Model model) {
 		List<User> list = userService.getUserList(page);

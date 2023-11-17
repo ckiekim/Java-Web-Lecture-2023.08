@@ -6,8 +6,15 @@
 <head>
 	<%@ include file="../common/head.jspf" %>
 	<style>
-		th, td { text-align: center; }
+		th, td	{ text-align: center; }
+		.disabled-link	{ pointer-events: none; }
 	</style>
+	<script>
+		function deleteFunc(uid) {
+			$('#delUid').val(uid);
+			$('#deleteModal').modal('show');
+		}
+	</script>
 </head>
 <body>
 	<%@ include file="../common/top.jspf" %>
@@ -35,8 +42,20 @@
 						<td>${user.email}</td>
 						<td>${user.regDate}</td>
 						<td>
-							<a href="#"><i class="fa-solid fa-user-pen"></i></a>
-							<a href="#"><i class="fa-solid fa-user-minus"></i></a>
+							<!-- 본인만이 수정 권한이 있음 -->
+							<c:if test="${sessUid eq user.uid}">
+								<a href="/sample/user/update/${user.uid}"><i class="fa-solid fa-user-pen me-2"></i></a>
+							</c:if>
+							<c:if test="${sessUid ne user.uid}">
+								<a href="#" class="disabled-link"><i class="fa-solid fa-user-pen me-2"></i></a>
+							</c:if>
+							<!-- 관리자만이 삭제 권한이 있음 -->
+							<c:if test="${sessUid eq 'admin'}">
+								<a href="javascript:deleteFunc('${user.uid}')"><i class="fa-solid fa-user-minus"></i></a>
+							</c:if>
+							<c:if test="${sessUid ne 'admin'}">
+								<a href="#" class="disabled-link"><i class="fa-solid fa-user-minus"></i></a>
+							</c:if>
 						</td>
 					</tr>
 				</c:forEach>	
@@ -49,9 +68,28 @@
 				</c:forEach>
 				</ul>				
 			</div>
+			<input type="hidden" id="delUid">
 			<!-- ================ Main =================== -->
 		</div>
 	</div>
 	<%@ include file="../common/bottom.jspf" %>
+	
+    <div class="modal" id="deleteModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">사용자 삭제</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <strong>삭제하시겠습니까?</strong>
+                    <div class="text-center mt-5">
+                        <button class="btn btn-danger" onclick="location.href='/sample/user/delete/'+$('#delUid').val()">삭제</button>
+                        <button class="btn btn-secondary ms-1" data-bs-dismiss="modal">취소</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>	
 </body>
 </html>
