@@ -8,9 +8,9 @@
                     <a href="#"><span class="badge bg-secondary">수정</span></a>
                 </div>
                 <div class="mt-5">
-                    <i class="fa fa-envelope me-1"></i>ckiekim@naver.com<br>
-                    <i class="fa-brands fa-github me-1"></i><a href="#">ckiekim</a><br>
-                    <i class="fa-brands fa-square-instagram me-1"></i><a href="#">ckiekimInsta</a><br>
+                    <i class="fa fa-envelope me-1"></i>${empty sessEmail ? "Email" : sessEmail}<br>
+                    <i class="fa-brands fa-github me-1"></i><a href="#">Github ID</a><br>
+                    <i class="fa-brands fa-square-instagram me-1"></i><a href="#">Instagram ID</a><br>
                     <i class="fa-solid fa-location-dot me-1"></i>서울시 영등포구
                         <a href="#"><span class="badge bg-secondary">날씨</span></a><br>
                     <button class="btn btn-sm btn-outline-primary mt-3">Edit Profile</button>
