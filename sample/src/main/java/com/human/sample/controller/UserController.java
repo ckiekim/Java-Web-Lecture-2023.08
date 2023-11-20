@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.human.sample.entity.User;
 import com.human.sample.service.UserService;
@@ -22,9 +24,15 @@ import com.human.sample.service.UserService;
 public class UserController {
 	@Autowired private UserService userService;
 
+	@ResponseBody
 	@GetMapping("/update/{uid}")
 	public String updateForm(@PathVariable String uid) {
-		return "";
+		User user = userService.getUser(uid);
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("uid", user.getUid());
+		jsonObject.put("uname", user.getUname());
+		jsonObject.put("email", user.getEmail());
+		return jsonObject.toJSONString();
 	}
 	
 	@PostMapping("/update/{uid}")

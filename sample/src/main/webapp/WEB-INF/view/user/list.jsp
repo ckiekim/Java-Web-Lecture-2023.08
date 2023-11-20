@@ -10,6 +10,20 @@
 		.disabled-link	{ pointer-events: none; }
 	</style>
 	<script>
+		function updateFunc(uid) {
+			console.log('updateFunc()');
+			$.ajax({
+				type: 'GET',
+				url: '/sample/user/update/' + uid,
+				success: function(result) {
+					let user = JSON.parse(result);
+					$('#uid').val(user.uid);
+					$('#uname').val(user.uname);
+					$('#email').val(user.email);
+					$('#updateModal').modal('show');
+				}
+			});
+		}
 		function deleteFunc(uid) {
 			$('#delUid').val(uid);
 			$('#deleteModal').modal('show');
@@ -44,7 +58,7 @@
 						<td>
 							<!-- 본인만이 수정 권한이 있음 -->
 							<c:if test="${sessUid eq user.uid}">
-								<a href="/sample/user/update/${user.uid}"><i class="fa-solid fa-user-pen me-2"></i></a>
+								<a href="javascript:updateFunc('${user.uid}')"><i class="fa-solid fa-user-pen me-2"></i></a>
 							</c:if>
 							<c:if test="${sessUid ne user.uid}">
 								<a href="#" class="disabled-link"><i class="fa-solid fa-user-pen me-2"></i></a>
@@ -73,7 +87,49 @@
 		</div>
 	</div>
 	<%@ include file="../common/bottom.jspf" %>
-	
+	<div class="modal" id="updateModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">사용자 수정</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/sample/user/update" method="post">
+                        <input type="hidden" name="uid" id="hiddenUid">
+                        <table class="table table-borderless">
+                            <tr>
+                                <td style="width:35%"><label class="col-form-label">사용자 ID</label></td>
+                                <td style="width:65%"><input type="text" id="uid" class="form-control" disabled></td>
+                            </tr>
+                            <tr>
+                                <td><label class="col-form-label">패스워드</label></td>
+                                <td><input type="password" name="pwd" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <td><label class="col-form-label">패스워드 확인</label></td>
+                                <td><input type="password" name="pwd2" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <td><label class="col-form-label">이름</label></td>
+                                <td><input type="text" name="uname" id="uname" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <td><label class="col-form-label">이메일</label></td>
+                                <td><input type="text" name="email" id="email" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align: center;">
+                                    <input class="btn btn-primary" type="submit" value="수정">
+                                    <input class="btn btn-secondary ms-1" type="reset" value="취소">
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal" id="deleteModal">
         <div class="modal-dialog">
             <div class="modal-content">
