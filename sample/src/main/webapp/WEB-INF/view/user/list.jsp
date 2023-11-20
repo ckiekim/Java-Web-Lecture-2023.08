@@ -96,7 +96,6 @@
                 </div>
                 <div class="modal-body">
                     <form action="/sample/user/update" method="post">
-                        <input type="hidden" name="uid" id="hiddenUid">
                         <table class="table table-borderless">
                             <tr>
                                 <td style="width:35%"><label class="col-form-label">사용자 ID</label></td>

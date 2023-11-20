@@ -35,9 +35,27 @@ public class UserController {
 		return jsonObject.toJSONString();
 	}
 	
-	@PostMapping("/update/{uid}")
-	public String updateProc(@PathVariable String uid) {
-		return "";
+	@PostMapping("/update")
+	public String updateProc(String pwd, String pwd2, String uname, 
+							 String email, HttpSession session, Model model) {
+		String uid = (String) session.getAttribute("sessUid");
+		User user = userService.getUser(uid);
+		// System.out.println("pwd=" + pwd + ", pwd2=" + pwd2);
+		if (pwd.length() >= 4 && pwd.equals(pwd2)) {
+			String hashedPwd = BCrypt.hashpw(pwd, BCrypt.gensalt());
+			user.setPwd(hashedPwd);
+		} else if (pwd.equals("") && pwd2.equals("")) {
+			;				// 아무일도 하지 않는다
+		} else {
+			model.addAttribute("msg", "패스워드를 다시 입력하고 수정하세요.");
+			model.addAttribute("url", "/sample/user/list/" + session.getAttribute("currentUserPage"));
+			return "common/alertMsg";
+		}
+		user.setUname(uname);
+		user.setEmail(email);
+		userService.updateUser(user);
+		
+		return "redirect:/user/list/" + session.getAttribute("currentUserPage");
 	}
 	
 	@GetMapping("/delete/{uid}")
