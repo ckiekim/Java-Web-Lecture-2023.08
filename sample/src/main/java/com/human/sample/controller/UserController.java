@@ -33,9 +33,9 @@ public class UserController {
 	}
 	
 	@GetMapping("/delete/{uid}")
-	public String delete(@PathVariable String uid) {
-		System.out.println(uid);
-		return "redirect:/home";
+	public String delete(@PathVariable String uid, HttpSession session) {
+		userService.deleteUser(uid);
+		return "redirect:/user/list/" + session.getAttribute("currentUserPage");
 	}
 	
 	@GetMapping("/list/{page}")
@@ -50,6 +50,7 @@ public class UserController {
 			pageList.add(String.valueOf(i));
 		model.addAttribute("pageList", pageList);
 		session.setAttribute("currentUserPage", page);
+		model.addAttribute("menu", "user");
 		
 		return "user/list";
 	}

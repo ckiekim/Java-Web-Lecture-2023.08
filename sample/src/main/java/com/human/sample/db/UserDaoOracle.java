@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.human.sample.entity.User;
 
@@ -25,5 +26,8 @@ public interface UserDaoOracle {
 			+ "    (select * from users where isDeleted=0) a"
 			+ "    where rownum <= #{limit}) where rnum > #{offset}")
 	public List<User> getUserList(int offset, int limit);
+	
+	@Update("update users set isDeleted=1 where \"uid\"=#{uid}")
+	void deleteUser(String uid);			// 인터페이스이기 때문에 public 생략 가능
 	
 }

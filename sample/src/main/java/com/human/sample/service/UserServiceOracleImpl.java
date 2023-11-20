@@ -46,8 +46,7 @@ public class UserServiceOracleImpl implements UserService {
 
 	@Override
 	public void deleteUser(String uid) {
-		// TODO Auto-generated method stub
-		
+		userDao.deleteUser(uid);
 	}
 
 	@Override

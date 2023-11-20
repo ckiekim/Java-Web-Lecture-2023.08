@@ -13,7 +13,7 @@
                     <a class="nav-link ${menu eq 'board' ? 'active' : ''}" href="#"><i class="far fa-list-alt"></i> 게시판</a>
                 </li>
                 <li class="nav-item ms-3">
-                    <a class="nav-link ${menu eq 'user' ? 'active' : ''}" href="#"><i class="fas fa-user-friends"></i> 사용자</a>
+                    <a class="nav-link ${menu eq 'user' ? 'active' : ''}" href="/sample/user/list/1"><i class="fas fa-user-friends"></i> 사용자</a>
                 </li>
                 <li class="nav-item dropdown ms-3">
                     <a class="nav-link dropdown-toggle ${menu eq 'ai' ? 'active' : ''}" href="#" data-bs-toggle="dropdown">
