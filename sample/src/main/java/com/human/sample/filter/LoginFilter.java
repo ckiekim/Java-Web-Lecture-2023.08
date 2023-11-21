@@ -32,7 +32,7 @@ public class LoginFilter extends HttpFilter implements Filter {
 		String sessionUid = (String) session.getAttribute("sessUid");
 		
 		// 로그인해야만 들어올 수 있는 path
-		String[] urlPatterns = {"/user/list", "/user/update", "/user/delete", "/schedule"};
+		String[] urlPatterns = {"/user/list", "/user/update", "/schedule"};
 		for (String routing: urlPatterns) {
 			if (uri.contains(routing)) {
 				if (sessionUid == null || sessionUid.equals(""))

@@ -25,8 +25,10 @@ public class UserController {
 	@Autowired private UserService userService;
 
 	@ResponseBody
-	@GetMapping("/update/{uid}")
-	public String updateForm(@PathVariable String uid) {
+	@GetMapping(value = {"/update/{uid}", "update"})
+	public String updateForm(@PathVariable(required = false) String uid) {
+		if (uid == null)
+			return "redirect:/user/login";
 		User user = userService.getUser(uid);
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("uid", user.getUid());
@@ -38,8 +40,11 @@ public class UserController {
 	@PostMapping("/update")
 	public String updateProc(String pwd, String pwd2, String uname, 
 							 String email, HttpSession session, Model model) {
-		String uid = (String) session.getAttribute("sessUid");
-		User user = userService.getUser(uid);
+		String sessUid = (String) session.getAttribute("sessUid");
+		if (sessUid == null)
+			return "redirect:/user/login";
+		
+		User user = userService.getUser(sessUid);
 		// System.out.println("pwd=" + pwd + ", pwd2=" + pwd2);
 		if (pwd.length() >= 4 && pwd.equals(pwd2)) {
 			String hashedPwd = BCrypt.hashpw(pwd, BCrypt.gensalt());
@@ -60,6 +65,9 @@ public class UserController {
 	
 	@GetMapping("/delete/{uid}")
 	public String delete(@PathVariable String uid, HttpSession session) {
+		String sessUid = (String) session.getAttribute("sessUid");
+		if (sessUid == null)
+			return "redirect:/user/login";
 		userService.deleteUser(uid);
 		return "redirect:/user/list/" + session.getAttribute("currentUserPage");
 	}
