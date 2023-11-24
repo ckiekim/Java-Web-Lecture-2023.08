@@ -1,4 +1,4 @@
-package com.human.sample.pojo;
+package com.human.sample.restApi;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
