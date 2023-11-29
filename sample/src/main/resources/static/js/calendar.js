@@ -55,7 +55,7 @@ function deleteSchedule() {
 	let sid = $('#sid2').val();
 	const answer = confirm('정말로 삭제하시겠습니까?');
 	if (answer) {
-		location.href = '/sbbs/schedule/delete/' + sid;
+		location.href = '/sample/schedule/delete/' + sid;
 	}
 }
 
