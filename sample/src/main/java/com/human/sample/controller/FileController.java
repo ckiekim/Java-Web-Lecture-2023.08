@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -102,6 +104,22 @@ public class FileController {
 	@GetMapping("/formAjax")
 	public String formAjax() {
 		return "file/formAjax";
+	}
+	
+	@ResponseBody
+	@PostMapping("/formAjax")
+	public String formAjaxProc(String title, MultipartFile file) {
+		String filename = file.getOriginalFilename();
+		String path = uploadDir + "sample/" + filename;
+		try {
+			file.transferTo(new File(path));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		JSONObject result = new JSONObject();
+		result.put("title", title);
+		result.put("filename", filename);
+		return result.toString();
 	}
 	
 }
