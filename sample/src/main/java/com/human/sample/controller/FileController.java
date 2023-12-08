@@ -7,6 +7,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Controller
 @RequestMapping("/file")
@@ -54,7 +57,6 @@ public class FileController {
 		Path path = Paths.get(pathStr);
 		try {
 			String contentType = Files.probeContentType(path);
-			System.out.println("contentType: " + contentType);
 			HttpHeaders header = new HttpHeaders();
 			header.setContentDisposition(
 					ContentDisposition.builder("attachment")
@@ -67,6 +69,39 @@ public class FileController {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	@GetMapping("/formUploadMultiple")
+	public String formUploadMultiple() {
+		return "file/formMultiple";
+	}
+	
+	@PostMapping("/formUploadMultiple")
+	public String formUploadMultipleProc(MultipartHttpServletRequest req, Model model) {
+		String title = req.getParameter("title");
+		List<MultipartFile> multipartFileList = req.getFiles("files");
+		List<String> fileList = new ArrayList<>();
+		for (MultipartFile part: multipartFileList) {
+			if (part.getContentType().contains("octet-stream"))
+				continue;
+			String filename = part.getOriginalFilename();
+			System.out.println("filename: " + filename);
+			fileList.add(filename);
+			String path = uploadDir + "sample/" + filename;
+			try {
+				part.transferTo(new File(path));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		model.addAttribute("title", title);
+		model.addAttribute("fileList", fileList);
+		return "file/formMultipleRes";
+	}
+	
+	@GetMapping("/formAjax")
+	public String formAjax() {
+		return "file/formAjax";
 	}
 	
 }
